@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Owner Sign Up
+<!--  -->
+{% endblock %}
+<!--  -->
+{% block content %}
+<h1>Owner Sign Up</h1>
+
+<form method="post">
+  {% csrf_token %}
+
+  <label for="{{ form.username.id_for_label }}">Username</label>
+  {{ form.username }}
+
+  <label for="{{ form.email.id_for_label }}">Email</label>
+  {{ form.email }}
+  <label for="first_name">First Name</label>
+  <input type="text" name="first_name" required />
+
+  <label for="last_name">Last Name</label>
+  <input type="text" name="last_name" required />
+
+  <label for="{{ form.password1.id_for_label }}">Password</label>
+  {{ form.password1 }}
+
+  <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+  {{ form.password2 }}
+  <label for="id_company_name">Company Name</label>
+  <input type="text" name="company_name" id="id_company_name" />
+
+  <button type="submit" class="button-black">SIGN UP</button>
+</form>
+{% endblock %}

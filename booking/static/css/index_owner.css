@@ -1,0 +1,111 @@
+.owner-dashboard-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-family: "Arial", sans-serif;
+  color: #fff;
+}
+
+.welcome-header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: #f28c38;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(230, 57, 70, 0.5);
+}
+
+.add-listing-button {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 20px;
+  padding: 12px 24px;
+  background-color: #f28c38;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.add-listing-button:hover {
+  background-color: #e63946;
+  transform: translateY(-2px);
+}
+
+.add-listing-button:active {
+  transform: translateY(0);
+}
+
+.error-message {
+  text-align: center;
+  color: #e63946;
+  font-weight: 500;
+  margin: 15px 0;
+}
+
+.apartment-list {
+  display: grid;
+  gap: 20px;
+}
+
+.apartment-card {
+  background-color: #444;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #f28c38;
+}
+
+.apartment-card h3 {
+  margin: 0 0 10px;
+  color: #f28c38;
+  font-size: 20px;
+}
+
+.apartment-card p {
+  margin: 5px 0;
+  color: #fff;
+}
+
+.apartment-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.action-button {
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.action-button.edit {
+  background-color: #f28c38;
+  color: #fff;
+}
+
+.action-button.edit:hover {
+  background-color: #d97a30;
+}
+
+.action-button.delete {
+  background-color: #e63946;
+  color: #fff;
+}
+
+.action-button.delete:hover {
+  background-color: #c81e2e;
+}
+
+.no-apartments {
+  text-align: center;
+  color: #aaa;
+  font-style: italic;
+  margin: 20px 0;
+}

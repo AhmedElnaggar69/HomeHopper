@@ -1,0 +1,98 @@
+{% extends "base.html" %}<!-- prettier-ignore -->
+{% block title %}Welcome{% endblock %}
+<!-- prettier-ignore -->
+{% block extra_head %}
+<style>
+  /* General page styling */
+  body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Container for content */
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* Styling for the 'Find your next home' text */
+  .welcome-message {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f97316;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  /* Button styling */
+  a[href="{% url 'apartment_list' %}"],
+  a[href="{% url 'chat_list' %}"] {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #f97316;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  a[href="{% url 'apartment_list' %}"]:hover,
+  a[href="{% url 'chat_list' %}"]:hover {
+    background-color: #ef4444;
+    transform: scale(1.05);
+  }
+
+  /* Location loading text */
+  p[style="color: black;"] {
+    color: #f97316 !important;
+    font-style: italic;
+    text-align: center;
+    margin: 15px 0;
+  }
+
+  /* Animation for welcome message */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .welcome-message {
+      font-size: 1.8rem;
+    }
+
+    .content {
+      padding: 10px;
+    }
+
+    a[href="{% url 'apartment_list' %}"],
+    a[href="{% url 'chat_list' %}"] {
+      padding: 8px 16px;
+      margin: 5px;
+    }
+  }
+</style>
+{% endblock %} {% block content %}
+<div class="content">
+  <h1 class="welcome-message">Welcome, {{ user.username }}!</h1>
+  <p class="welcome-message">Find your next home 👀</p>
+
+  <a href="{% url 'apartment_list' %}">🏘️ Find Near Apartment</a>
+  <a href="{% url 'chat_list' %}">💬 Chats</a>
+</div>
+{% endblock %}

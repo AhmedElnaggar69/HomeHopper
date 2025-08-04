@@ -1,0 +1,54 @@
+<!-- templates/apartment_form.html -->
+{% extends 'base.html' %} {% block content %}
+<h2>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Apartment</h2>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <div id="map" style="height: 400px; width: 100%"></div>
+  <button type="submit">Save</button>
+</form>
+
+<!-- Include Leaflet CSS and JS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // Initialize the map
+  const map = L.map('map').setView([51.505, -0.09], 13); // Default center (London)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  // Variable to hold the marker
+  let marker = null;
+
+  // Function to update hidden inputs
+  function updateLatLng(lat, lng) {
+    document.getElementById('id_latitude').value = lat.toFixed(6);
+    document.getElementById('id_longitude').value = lng.toFixed(6);
+  }
+
+  // Handle map click to place or move marker
+  map.on('click', function(e) {
+    const lat = e.latlng.lat;
+    const lng = e.latlng.lng;
+    if (marker) {
+      marker.setLatLng([lat, lng]);
+    } else {
+      marker = L.marker([lat, lng]).addTo(map);
+    }
+    updateLatLng(lat, lng);
+  });
+
+  // If editing an existing apartment, set the initial marker
+  {% if form.instance.pk %}
+    const initialLat = {{ form.instance.latitude|default:0 }};
+    const initialLng = {{ form.instance.longitude|default:0 }};
+    marker = L.marker([initialLat, initialLng]).addTo(map);
+    map.setView([initialLat, initialLng], 13);
+    updateLatLng(initialLat, initialLng);
+  {% endif %}
+</script>
+{% endblock %}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Login{% endblock %}</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #1a1a1a;
+        color: #f5f5f5;
+        padding: 40px;
+        min-height: 100vh;
+      }
+
+      h1 {
+        color: #ffa500;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #2a2a2a;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(255, 165, 0, 0.2);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #ffa500;
+      }
+
+      /* Style for form fields injected with 'form-input' class */
+      .form-input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #444;
+        color: white;
+      }
+
+      button,
+      a.button-orange,
+      a.button-black {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 8px;
+        font-size: 16px;
+        text-decoration: none;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        cursor: pointer;
+        border: none;
+      }
+
+      button {
+        background-color: orange;
+        color: black;
+      }
+
+      button:hover {
+        background-color: #ff8c00;
+        transform: scale(1.03);
+      }
+
+      .button-orange {
+        background-color: orange;
+        color: black;
+      }
+
+      .button-orange:hover {
+        background-color: #ff8c00;
+        transform: scale(1.03);
+      }
+
+      .button-black {
+        background-color: black;
+        color: orange;
+      }
+
+      .button-black:hover {
+        background-color: #333;
+        transform: scale(1.03);
+      }
+
+      .greeting {
+        text-align: center;
+        margin-top: 20px;
+        color: #00ff99;
+        font-size: 18px;
+      }
+
+      /* Optional: Center content vertically */
+      .center-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        flex-direction: column;
+      }
+
+      .layout {
+        display: flex;
+        min-height: 80vh;
+        gap: 40px;
+      }
+
+      .sidebar {
+        width: 220px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .main-content {
+        flex: 1;
+      }
+
+      .header-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 40px;
+        background-color: #2a2a2a;
+        border-bottom: 2px solid orange;
+        margin-bottom: 20px;
+      }
+      .header-nav .logo {
+        color: orange;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .header-nav .nav-links a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: bold;
+        transition: color 0.2s ease;
+      }
+      .header-nav .nav-links a:hover {
+        color: orange;
+      }
+    </style>
+    {% block extra_head %}{% endblock %}
+  </head>
+
+  <body>
+    <header class="header-nav">
+      <a href="{% url 'starter' %}" class="logo">HomeHopper</a>
+      <nav class="nav-links">
+        {% if user.is_authenticated %} {% if user.user_profile %}
+        <a href="{% url 'index_user' %}">Home</a>
+        <a href="{% url 'user_profile' %}">Profile</a>
+        <a href="{% url 'chat_list' %}">Chats</a>
+        {% elif user.owner_profile %} {# Check if it's an owner #}
+        <a href="{% url 'owner_dashboard' %}">Dashboard</a>
+        <a href="{% url 'owner_profile' %}">Profile</a>
+        <a href="{% url 'chat_list' %}">Chats</a>
+        {% endif %}
+        <a href="{% url 'logout_url' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'starter' %}">Login/Signup</a>
+        {% endif %}
+      </nav>
+    </header>
+    <div class="main-content-wrapper">
+      {# Wrap content for better layout control #}
+      <!--  -->
+      {% block content %}
+      <!--  -->
+      {% endblock %}
+    </div>
+  </body>
+</html>

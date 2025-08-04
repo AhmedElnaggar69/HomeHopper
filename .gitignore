@@ -1,0 +1,43 @@
+ 
+# Django-specific
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+/migrations/
+*.log
+*.pot
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+/local_settings.py
+/secret_settings.py
+*.log
+/migration/
+/media/
+/staticfiles/
+
+# Virtual environment
+venv/
+env/
+*.venv
+
+# Sensitive files
+.env
+settings.py  # Remove this line if settings.py is safe to commit
+local_settings.py
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+
+# Windows-specific
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+<!-- prettier-ignore -->
+{% block title %}Owner Login{% endblock %}
+<!-- prettier-ignore -->
+{% block content %}
+<h1>Owner Login</h1>
+
+<form method="post">
+  {% csrf_token %}
+
+  <label for="{{ form.username.id_for_label }}">Username</label>
+  {{ form.username }}
+
+  <label for="{{ form.password.id_for_label }}">Password</label>
+  {{ form.password }}
+
+  <button type="submit" class="button-orange">LOGIN</button>
+
+  {% if form.errors %}
+  <p style="color: red; text-align: center">{{ form.errors }}</p>
+  {% endif %}
+</form>
+{% endblock %}

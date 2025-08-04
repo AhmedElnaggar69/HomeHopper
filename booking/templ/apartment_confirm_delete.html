@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %}Delete Apartment{% endblock %}
+
+<!--  -->
+{% block content %}
+<h1>Delete Apartment</h1>
+
+<p style="text-align: center; margin-bottom: 30px">
+  Are you sure you want to delete "{{ object.title }}"?
+</p>
+
+<form method="post" style="max-width: 300px">
+  {% csrf_token %}
+  <button type="submit" class="button-orange">Yes, Delete</button>
+  <a href="{% url 'owner_dashboard' %}" class="button-black">Cancel</a>
+</form>
+{% endblock %}

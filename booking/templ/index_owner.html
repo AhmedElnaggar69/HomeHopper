@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+<!-- prettier-ignore -->
+{% block title %}
+Owner Dashboard
+{% endblock %}
+<!-- prettier-ignore -->
+{% block extra_head %}
+<style>
+  /* General page styling */
+  body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Container for content */
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* Styling for the welcome text */
+  .welcome-message {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f97316;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  /* Button styling */
+  a[href="{% url 'add_apartment' %}"],
+  a[href*="edit_apartment"],
+  a[href*="delete_apartment"] {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #f97316;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  a[href="{% url 'add_apartment' %}"]:hover,
+  a[href*="edit_apartment"]:hover,
+  a[href*="delete_apartment"]:hover {
+    background-color: #ef4444;
+    transform: scale(1.05);
+  }
+
+  /* Apartment listing styling */
+  .apartment {
+    background-color: #2a2a2a;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 8px;
+    border: 1px solid #f97316;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .apartment h3 {
+    color: #f97316;
+    margin: 0 0 10px 0;
+  }
+
+  .apartment p {
+    margin: 5px 0;
+    color: #ffffff;
+  }
+
+  .apartment p.owner {
+    color: #ef4444;
+    font-weight: bold;
+  }
+
+  /* Error message styling */
+  .error {
+    color: #ef4444;
+    text-align: center;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+
+  /* No apartments message */
+  .no-apartments {
+    text-align: center;
+    color: #f97316;
+    font-style: italic;
+    margin: 20px 0;
+  }
+
+  /* Debug message */
+  .debug {
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin: 5px 0;
+    background-color: #444;
+    padding: 5px;
+    border-radius: 3px;
+  }
+
+  /* Animation for welcome message */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .welcome-message {
+      font-size: 1.8rem;
+    }
+
+    .content {
+      padding: 10px;
+    }
+
+    a[href="{% url 'add_apartment' %}"],
+    a[href*="edit_apartment"],
+    a[href*="delete_apartment"] {
+      padding: 8px 16px;
+      margin: 5px;
+    }
+  }
+</style>
+{% endblock %} {% block content %}
+<div class="content">
+  <h1 class="welcome-message">Welcome, {{ name }}</h1>
+  <a href="{% url 'add_apartment' %}">➕ Add New Listing</a>
+  {% if error %}
+  <p class="error">{{ error }}</p>
+  {% endif %} {% for apart in all_apart %}
+  <div class="apartment">
+    <h3>{{ apart.title }}</h3>
+    <p class="owner">👤 Owner: {{ apart.owner.username }}</p>
+    <p>📄 {{ apart.description }}</p>
+    <p>💰 Price: ${{ apart.price }}</p>
+    <p>📍 Lat: {{ apart.latitude }} | Long: {{ apart.longitude }}</p>
+
+    {% if apart.pk %}
+    <a href="{% url 'edit_apartment' apart.pk %}">✏️ Edit</a>
+    <a href="{% url 'delete_apartment' apart.pk %}">🗑️ Delete</a>
+    {% else %}
+    <p class="error">Error: Apartment has no valid PK</p>
+    {% endif %}
+  </div>
+  {% empty %}
+  <p class="no-apartments">
+    No apartments found for you. Start by adding a new listing!
+  </p>
+  {% endfor %}
+</div>
+{% endblock %}

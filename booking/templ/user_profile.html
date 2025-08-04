@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+<!--  -->
+{% block title %}User Profile{% endblock %}
+<!--  -->
+{% block content %}
+<h1>Your Profile</h1>
+
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit" class="button-orange">Save Profile</button>
+</form>
+
+<a href="{% url 'index_user' %}" class="button-black">Back to Home</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+<!-- prettier-ignore -->
+{% block title %} Sign Up {% endblock %}
+<!-- prettier-ignore -->
+{% block content %}
+<h1>Sign Up</h1>
+<form action="{% url 'signin_url' %}" method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit" class="button-orange">REGISTER</button>
+</form>
+<!-- prettier-ignore -->
+<a href="{% url 'login_url' %}" class="button-black">Back to Login</a>
+{% endblock %}

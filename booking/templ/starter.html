@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+<!-- Owner Side -->
+{% block title %}Welcome{% endblock %}
+<!-- Owner Side -->
+{% block content %}
+<div class="center-wrapper">
+  <h1>Welcome</h1>
+
+  <div style="display: flex; gap: 30px; margin-top: 30px">
+    <!-- User Side -->
+    <div class="user_side" style="text-align: center">
+      <label style="font-size: 1.2em; margin-bottom: 15px">User</label>
+      <a href="{% url 'login_url' %}" class="button-orange">LOGIN</a>
+      <a href="{% url 'signin_url' %}" class="button-black">SIGN UP</a>
+    </div>
+
+    <!-- Owner Side -->
+    <div class="owner_side" style="text-align: center">
+      <label style="font-size: 1.2em; margin-bottom: 15px">Owner</label>
+      <a href="{% url 'login_url_owner' %}" class="button-orange">LOGIN</a>
+      <a href="{% url 'signin_url_owner' %}" class="button-black">SIGN UP</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

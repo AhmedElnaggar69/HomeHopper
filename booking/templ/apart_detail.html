@@ -1,0 +1,32 @@
+<!-- templates/apart_detail.html -->
+{% extends 'base.html' %} {% block content %}
+<h2>Apartment Listings</h2>
+{% for apartment in all_apart %}
+<div
+  class="apartment-card"
+  style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px"
+>
+  <h3>{{ apartment.title }}</h3>
+  <p>{{ apartment.description }}</p>
+  <p>Price: ${{ apartment.price }}</p>
+  <p>Available: {% if apartment.is_available %}Yes{% else %}No{% endif %}</p>
+  <div id="map-{{ apartment.id }}" style="height: 200px; width: 100%"></div>
+  <a href="{% url 'initiate_chat_from_apartment' apartment.id %}"
+    >Chat with Owner</a
+  >
+</div>
+
+<!-- Initialize map for this apartment -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map_{{ apartment.id }} = L.map('map-{{ apartment.id }}').setView([{{ apartment.latitude }}, {{ apartment.longitude }}], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map_{{ apartment.id }});
+  L.marker([{{ apartment.latitude }}, {{ apartment.longitude }}]).addTo(map_{{ apartment.id }});
+</script>
+{% endfor %} {% endblock %}

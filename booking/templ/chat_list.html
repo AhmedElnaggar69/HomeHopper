@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+<!--  -->
+{% block title %}Your Chats{% endblock %}
+<!--  -->
+{% block content %}
+<h1>Your Chats</h1>
+
+<div class="apartment-list">
+  {# Re-using apartment-list style for chat cards #} {% if chat_partners %}
+  <!--  -->
+  {% for partner in chat_partners %}
+  <div class="apartment-card">
+    {# Re-using apartment-card style #}
+    <h2>
+      <a
+        href="{% url 'chat_detail' partner.id %}"
+        style="color: orange; text-decoration: none"
+        >💬 Chat with {{ partner.username }}</a
+      >
+    </h2>
+    {# You could add last message snippet here if you fetch it in the view #}
+  </div>
+  {% endfor %} {% else %}
+  <p style="text-align: center">You haven't started any chats yet.</p>
+  {% endif %}
+</div>
+{% endblock %}
